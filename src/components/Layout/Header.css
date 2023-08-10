@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5rem;
+  background-color: #080449;
+  color: white;
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
+}
+
+.navbar-list li {
+  list-style: none;
+}
+
+.navbar-list li a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: white;
+}
+
+
+.navbar-list li a:hover {
+  color: brown;
+}
