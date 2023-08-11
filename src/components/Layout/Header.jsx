@@ -9,6 +9,10 @@ const Header = () => {
   const { isLoggedIn } = authCtx;
   console.log(isLoggedIn);
 
+  const logoutHandler=()=> {
+    authCtx.logout();
+  }
+
   return (
     <header className="header">
       <h1 className="title">Authentication</h1>
@@ -26,7 +30,9 @@ const Header = () => {
           )}
           {isLoggedIn && (
             <li>
-              <NavLink to="/#logout">Logout</NavLink>
+              <button type="button" className="logout" onClick={logoutHandler}>
+                Logout
+              </button>
             </li>
           )}
         </ul>
