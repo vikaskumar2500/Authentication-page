@@ -14,7 +14,7 @@ const AuthProvider = (props) => {
     setToken(null);
   };
 
-  console.log('AuthProvider Runnning');
+  // console.log('AuthProvider Runnning');
   return (
     <AuthContext.Provider
       value={{

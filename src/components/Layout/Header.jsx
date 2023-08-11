@@ -7,11 +7,19 @@ import AuthContext from "../../store/AuthContext";
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const { isLoggedIn } = authCtx;
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
-  const logoutHandler=()=> {
+  const logoutHandler = () => {
+    localStorage.removeItem(authCtx.token);
     authCtx.logout();
-  }
+  };
+
+  window.addEventListener('DOMContentLoaded', ()=> {
+    const existToken = localStorage.getItem(authCtx.token);
+    if(existToken!==null) {
+      authCtx.login(authCtx.token);
+    }
+  })
 
   return (
     <header className="header">
@@ -20,7 +28,9 @@ const Header = () => {
         <ul className="navbar-list">
           {!isLoggedIn && (
             <li>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/login" activeClassName="active">
+                Login
+              </NavLink>
             </li>
           )}
           {isLoggedIn && (

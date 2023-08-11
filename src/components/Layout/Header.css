@@ -25,13 +25,15 @@
 }
 
 
-.navbar-list li a:hover {
-  color: brown;
+.navbar-list li a:hover, .navbar-list li .active {
+  color: rgb(204, 121, 42);
 }
 
 li button {
   background: none;
-  border: none;
   color: white;
   font-size: 1.2rem;
+  border: 2px solid rgb(194, 175, 175);
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
 }

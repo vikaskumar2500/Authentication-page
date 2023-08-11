@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import "./App.css";
 import Layout from "./components/Layout/Layout";
 import AuthForm from "./components/Auth/AuthForm";
 import ProfileForm from "./components/Profile/ProfileForm";
+import AuthContext from "./store/AuthContext";
+import StartingPage from "./components/StartingPage/StartingPage";
 
 const App = () => {
+  const authCtx = useContext(AuthContext);
+  const { isLoggedIn } = authCtx;
+
+  useEffect(()=> {
+    const [existToken] = Object.keys(localStorage);
+    if(existToken) {
+      authCtx.login(existToken);
+    }
+  })
+
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
-          <Redirect to="/login" />
+          <StartingPage />
         </Route>
-        <Route path="/login" exact>
-          <AuthForm />
-        </Route>
+        {!isLoggedIn && (
+          <Route path="/login" exact>
+            <AuthForm />
+          </Route>
+        )}
+        {isLoggedIn && (
+          <Route path="/login" exact>
+            <Redirect to="/" />
+          </Route>
+        )}
         <Route path="/profile">
-          <ProfileForm />
+          {isLoggedIn && <ProfileForm />}
+          {!isLoggedIn && <AuthForm />}
         </Route>
-        {/* <Route path="/profile" exact>
-          <ProfileForm />
-        </Route> */}
+        {/* global/ path */}
+        <Route path="/*">
+          <Redirect to="/" />
+        </Route>
       </Switch>
     </Layout>
   );

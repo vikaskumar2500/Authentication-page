@@ -42,6 +42,13 @@ const AuthForm = () => {
       if (response.ok) {
         response.json().then((data) => {
           authCtx.login(data.idToken);
+          localStorage.setItem(
+            data.idToken.trim(),
+            JSON.stringify({
+              email: enteredEmailRef.current.value,
+              password: enteredPasswordRef.current.value,
+            })
+          );
           enteredEmailRef.current.value = "";
           enteredPasswordRef.current.value = "";
         });
