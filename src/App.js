@@ -12,12 +12,15 @@ const App = () => {
   const authCtx = useContext(AuthContext);
   const { isLoggedIn } = authCtx;
 
-  useEffect(()=> {
+  // we can handling the after refreshing the page.
+  useEffect(() => {
     const [existToken] = Object.keys(localStorage);
-    if(existToken) {
+    if (existToken) {
       authCtx.login(existToken);
     }
-  })
+  });
+  // after 5mins we clear out the localstorage so that user automatic logout.
+  setTimeout(()=> {localStorage.clear()}, 3e+5);
 
   return (
     <Layout>
