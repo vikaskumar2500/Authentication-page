@@ -1,7 +1,9 @@
 import React, { useState, useRef, useContext } from "react";
-import AuthContext from "../../store/AuthContext";
 
+import AuthContext from "../../store/AuthContext";
 import "./AuthForm.css";
+import { NavLink } from "react-router-dom";
+
 const logouturl =
   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAPJhUdptjDOrFWJ5z5b0L6opgZsGKqfEo";
 const loginUrl =
@@ -36,26 +38,23 @@ const AuthForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          response.json().then((data) => {
-            let errorMessage = "Authentication Invalid";
-            if (data.error && data.error.message)
-              errorMessage = data.error.message;
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        authCtx.login(data.idToken);
-        enteredEmailRef.current.value = "";
-        enteredPasswordRef.current.value = "";
-        setIsLoading(false);
-      })
-      .catch(error=>alert(error.message));
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          authCtx.login(data.idToken);
+          enteredEmailRef.current.value = "";
+          enteredPasswordRef.current.value = "";
+        });
+      } else {
+        response.json().then((data) => {
+          let errorMessage = "Authentication Invalid";
+          if (data.error && data.error.message)
+            errorMessage = data.error.message;
+          alert(errorMessage);
+        });
+      }
+      setIsLoading(false);
+    });
   };
 
   return (
@@ -81,6 +80,12 @@ const AuthForm = () => {
           ref={enteredPasswordRef}
           required
         />
+      </div>
+
+      <div className="forgot-password">
+        <NavLink to="/login/profile" activeClassName="active">
+          Forget password?
+        </NavLink>
       </div>
 
       <div className="submit-btn">

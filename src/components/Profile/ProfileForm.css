@@ -1,10 +1,10 @@
-.auth-form {
+.profile {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  max-width: 20rem;
+  max-width: 30rem;
   margin: 2rem auto;
   background-color: #201c54;
   color: white;
@@ -13,7 +13,7 @@
   padding-bottom: 2rem;
 }
 
-.input {
+.updated-password {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -21,11 +21,11 @@
   gap: 0.3rem;
 }
 
-.input label {
+.updated-password label {
   font-weight: 600;
 }
 
-.input input {
+.updated-password input {
   width: 38vmin;
   padding: 0.3rem;
   border-radius: 5px;
@@ -34,7 +34,7 @@
   outline: none;
 }
 
-.submit-btn button{
+.profile-btn button{
   background-color: rgb(151, 76, 212);
   border: none;
   padding: 0.5rem 1.5rem;
@@ -42,17 +42,4 @@
   border-radius: 3px;
   color: white;
   margin-top: 0.5rem;
-}
-
-
-.auth-form .signup-link {
-  background-color: transparent;
-  border: none;
-  color: rgb(151, 76, 212);
-  font-size: 1.2rem;
-}
-
-.forgot-password a{
-  text-decoration: none;
-  color: rgb(151, 76, 212);
 }
