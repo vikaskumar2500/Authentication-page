@@ -20,8 +20,11 @@ const App = () => {
     }
   });
   // after 5mins we clear out the localstorage so that user automatic logout.
-  setTimeout(()=> {localStorage.clear()}, 3e+5);
-
+  setTimeout(()=> {
+    localStorage.clear()
+    authCtx.logout();
+  }, 3e5);
+ 
   return (
     <Layout>
       <Switch>
